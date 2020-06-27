@@ -7027,10 +7027,10 @@ INTERNAL_OTA_METADATA := $(PRODUCT_OUT)/ota_metadata
 
 $(call declare-0p-target,$(INTERNAL_OTA_METADATA))
 
-ifneq ($(CUSTOM_BUILD),)
-    $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := true
-else
+ifeq ($(TARGET_EXCLUDE_BACKUPTOOL),true)
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
+else
+    $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := true
 endif
 
 $(INTERNAL_OTA_PACKAGE_TARGET): KEY_CERT_PAIR := $(DEFAULT_KEY_CERT_PAIR)
